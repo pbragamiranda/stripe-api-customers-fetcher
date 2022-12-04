@@ -1,8 +1,10 @@
-require_relative "app/repositories/customer_repository"
-require_relative "app/controllers/customers_controller"
-require_relative "router"
+# frozen_string_literal: true
 
-CUSTOMERS_CSV_FILE = File.join(__dir__, "data/customers.csv")
+require_relative 'app/repositories/customer_repository'
+require_relative 'app/controllers/customers_controller'
+require_relative 'router'
+
+CUSTOMERS_CSV_FILE = File.join(__dir__, 'data/customers.csv')
 
 customer_repository = CustomerRepository.new(CUSTOMERS_CSV_FILE)
 customers_controller = CustomersController.new(customer_repository)

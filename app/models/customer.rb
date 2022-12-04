@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class Customer
-  attr_reader :id, :name, :email, :account_balance, :default_currency 
+  attr_reader :id, :name, :email, :account_balance, :default_currency
 
   def initialize(attributes = {})
     @id = attributes[:id]

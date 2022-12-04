@@ -1,4 +1,6 @@
-require "stripe"
+# frozen_string_literal: true
+
+require 'stripe'
 
 class Router
   def initialize(customers_controller)
@@ -21,17 +23,17 @@ class Router
   private
 
   def print_menu
-    puts "-------------- menu --------------"
-    puts "1. Download all your customers"
-    puts "2. Download next 50 customers"
-    puts "3. Display all your customers"
-    puts "4. Display number of custumers"
-    puts "9. Exit"
-    print "> "
+    puts '-------------- menu --------------'
+    puts '1. Download all your customers'
+    puts '2. Download next 50 customers'
+    puts '3. Display all your customers'
+    puts '4. Display number of custumers'
+    puts '9. Exit'
+    print '> '
   end
 
   def welcome_message
-    puts "Stripe api successfully validated. Welcome!" 
+    puts 'Stripe api successfully validated. Welcome!'
   end
 
   def route_action(choice)
@@ -41,7 +43,7 @@ class Router
     when 3 then @customers_controller.list_customers
     when 4 then @customers_controller.count_customers
     when 9 then stop!
-    else puts "Wrong input. Try again..."
+    else puts 'Wrong input. Try again...'
     end
   end
 
@@ -55,15 +57,15 @@ class Router
     begin
       Stripe::Customer.create
       api_key
-    rescue
-      puts "Invalid api key."
+    rescue StandardError
+      puts 'Invalid api key.'
       ask_and_verify_api_key
     end
   end
 
   def ask_for_stripe_api_key
-    puts "Please provide a valid stripe api key:"
-    print "> "
+    puts 'Please provide a valid stripe api key:'
+    print '> '
     gets.chomp
   end
 end

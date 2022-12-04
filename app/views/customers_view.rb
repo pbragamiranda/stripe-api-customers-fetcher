@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 class CustomersView
   def display(customers)
-    puts "id                 | name                       | email"
+    puts 'id                 | name                       | email'
     customers.each do |customer|
       puts "#{customer.id} | #{customer.name} | #{customer.email}"
     end
@@ -11,6 +13,6 @@ class CustomersView
   end
 
   def successful_message
-    puts "Customers downloaded successfully."
+    puts 'Customers downloaded successfully.'
   end
 end
