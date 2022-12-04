@@ -1,6 +1,6 @@
-require_relative "../views/customers_view"
 require_relative "../models/customer"
-require_relative "../services/stripe_customers_scraper"
+require_relative "../views/customers_view"
+require_relative "../services/stripe_customers_fetcher"
 
 class CustomersController
   def initialize(customer_repository)
@@ -8,11 +8,9 @@ class CustomersController
     @customers_view = CustomersView.new
   end
 
-  def download_customers(stripe_api_key, quantity: "all")
-    last_customer = @customer_repository.all.last
-    customers_from_stripe = StripeCustomersFetcher.new(stripe_api_key).call(last_customer)
-    @customer_repository.create_customers(customers_from_stripe, quantity)
-    @customers_view.successful_message
+  def list_customers
+    customers = @customer_repository.all
+    @customers_view.display(customers)
   end
 
   def count_customers
@@ -20,14 +18,10 @@ class CustomersController
     @customers_view.display_number_of_customers(number_of_customers)
   end
 
-  def list_customers
-    display_customers
-  end
-
-  private
-
-  def display_customers
-    customers = @customer_repository.all
-    @customers_view.display(customers)
+  def download_customers(stripe_api_key, quantity: "all")
+    last_customer = @customer_repository.all.last
+    customers_from_stripe = StripeCustomersFetcher.new(stripe_api_key).call(last_customer)
+    @customer_repository.create_customers(customers_from_stripe, quantity)
+    @customers_view.successful_message
   end
 end

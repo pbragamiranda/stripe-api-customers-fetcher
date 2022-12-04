@@ -2,9 +2,9 @@ require "stripe"
 
 class Router
   def initialize(customers_controller)
-    @customers_controller = customers_controller
     @running = true
     @stripe_api_key = ask_and_verify_api_key
+    @customers_controller = customers_controller
   end
 
   def run
