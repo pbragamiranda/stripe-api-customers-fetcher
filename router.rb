@@ -33,7 +33,7 @@ class Router
   end
 
   def welcome_message
-    puts 'Stripe api successfully validated. Welcome!'
+    puts 'Stripe API successfully validated. Welcome!'
   end
 
   def route_action(choice)
@@ -58,13 +58,13 @@ class Router
       Stripe::Customer.create
       api_key
     rescue StandardError
-      puts 'Invalid api key.'
+      puts 'Invalid API key.'
       ask_and_verify_api_key
     end
   end
 
   def ask_for_stripe_api_key
-    puts 'Please provide a valid stripe api key:'
+    puts 'Please provide a valid Stripe API key:'
     print '> '
     gets.chomp
   end
